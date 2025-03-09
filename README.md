@@ -34,6 +34,9 @@ fn main() -> ! {
     {
         use core::mem::MaybeUninit;
         const HEAP_SIZE: usize = 1024;
+
+        // Needed if you are using 2024 edition
+        #[allow(static_mut_refs)]
         static mut HEAP_MEM: [MaybeUninit<u8>; HEAP_SIZE] = [MaybeUninit::uninit(); HEAP_SIZE];
         unsafe { HEAP.init(&raw mut HEAP_MEM as usize, HEAP_SIZE) }
     }
